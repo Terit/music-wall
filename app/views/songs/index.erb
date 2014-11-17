@@ -1,0 +1,11 @@
+<h1>All Musics</h1>
+
+<% if @songs %>
+
+<% @songs.each do |song| %>
+  <div class="song">
+    <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+  </div>
+<% end %>
+
+<% end %>
