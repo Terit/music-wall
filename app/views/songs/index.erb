@@ -4,10 +4,14 @@
 
   <% @songs.each do |song| %>
     <div class="song">
+      <a href="songs/<%= song.id %>">
       <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+  </a>
     </div>
   <% end %>
 
 <% end %>
 
-<a href="/songs/new">Post your own song</a>
+<div>
+<a href="/songs/new"><h2>Post your own song</h2></a>
+</div>
