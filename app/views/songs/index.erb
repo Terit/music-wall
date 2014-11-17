@@ -2,10 +2,12 @@
 
 <% if @songs %>
 
-<% @songs.each do |song| %>
-  <div class="song">
-    <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
-  </div>
-<% end %>
+  <% @songs.each do |song| %>
+    <div class="song">
+      <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+    </div>
+  <% end %>
 
 <% end %>
+
+<a href="/songs/new">Post your own song</a>
