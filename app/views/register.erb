@@ -1,4 +1,4 @@
-<% if @user.errors.any? %>
+<% if @user && @user.errors.any? %>
   <div>
     <strong>Looks like we have some issues with your account:</strong>
     <ul>

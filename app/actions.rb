@@ -46,6 +46,7 @@ post '/register' do
     password: params[:password]
     )
   if @user.save
+    session[:user_id] = @user.id
     redirect '/songs'
   else
     erb :register
@@ -67,16 +68,30 @@ get '/songs/:id' do
   erb :'songs/show'
 end
 
-post '/songs' do
+post '/songs/new' do
   @song = Song.new(
     title: params[:title],
     author: params[:author],
-    url: params[:url]
+    url: params[:url],
+    user_id: current_user.id
     ) 
   if @song.save
     redirect '/songs'
   else
     erb :'songs/new'
+  end
+end
+
+post '/songs' do
+  @song = Song.find(params[:song_id].to_i)
+  @vote = Vote.where(user_id: current_user.id, song_id: @song.id).first
+  if @vote
+    @error = true
+    @songs = Song.all
+    erb :'songs/index'
+  else
+    Vote.create(user_id: current_user.id, song_id: @song.id, total_votes: 1)
+    redirect '/songs'
   end
 end
 
