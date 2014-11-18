@@ -5,7 +5,7 @@
   <% @songs.each do |song| %>
     <div class="song">
       <a href="songs/<%= song.id %>">
-      <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+      <h4><%= song.author %> - <%= song.title %><small> Posted By: <%= song.user.first_name %> <%= song.user.last_name %></small></h4>
   </a>
     </div>
   <% end %>
