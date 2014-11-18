@@ -35,7 +35,14 @@
         <li role="presentaion" class="active">
           <a href="/songs">Home</a>
         </li>
-        <li role="presentation"><a href="#">Login</a></li>
+        <% if session[:user_id] %>
+        <li role="presentation"><a href="#"><%= User.find(session[:user_id]).email %></a>
+        </li>
+        <li role="presentation"><a href="/logout">Logout</a></li>
+        <% else %>
+        <li role="presentation"><a href="/login">Login</a></li>
+        
+        <% end %>
       </ul>
     </nav>
       <h3 class="text-muted" style="line-height: 40px">Music Wall</h3>
