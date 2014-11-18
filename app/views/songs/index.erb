@@ -8,9 +8,10 @@
 <h1>All Musics</h1>
 
 <% if @songs %>
-
   <div class="container">
+
   <% @songs.each do |song| %>
+  <div class="row">
     <div class="col-md-10">
       <a href="songs/<%= song.id %>">
         <h4><%= song.author %> - <%= song.title %>
@@ -18,20 +19,21 @@
         </h4>
       </a>
       </div>
-      <div class="col-md-2">
 
-      <form method="post">
-          <h5>Votes: <%= Vote.where(song_id: song.id).sum(:total_votes) %> 
-          <% if session[:user_id] %>
-            <input type="hidden" name="vote" value="1" />
-            <button type="submit" name="song_id" value=<%= song.id %> ><i class="fa fa-thumbs-up"></i></button>
-      </form>
-      <form method="post">
-            <input type="hidden" name="vote" value="-1" />
-            <button type="submit" name="song_id" value=<%= song.id %>><i class="fa fa-thumbs-down"></i></button>
-          <% end %>
-      </form>
-      </h5>
+      <div class="col-md-2 volume-controls">
+        <!-- <h5>Votes: <%= Vote.where(song_id: song.id).sum(:total_votes) %> </h5> -->
+        <h5>Votes: <%= song.total_votes %> </h5>
+        <form method="post">
+            <% if session[:user_id] %>
+              <input type="hidden" name="vote" value="1" />
+              <button type="submit" name="song_id" value=<%= song.id %> ><i class="fa fa-thumbs-up"></i></button>
+        </form>
+        <form method="post">
+              <input type="hidden" name="vote" value="-1" />
+              <button type="submit" name="song_id" value=<%= song.id %>><i class="fa fa-thumbs-down"></i></button>
+            <% end %>
+        </form>
+      </div>
       </div>
   <% end %>
   </div>

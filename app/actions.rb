@@ -54,7 +54,7 @@ post '/register' do
 end
 
 get '/songs' do
-  @songs = Song.all
+  @songs = Song.all.order(total_votes: :desc)
   erb :'songs/index'
 end
 
@@ -83,15 +83,16 @@ post '/songs/new' do
 end
 
 post '/songs' do
-  binding.pry
   @song = Song.find(params[:song_id].to_i)
   @vote = Vote.where(user_id: current_user.id, song_id: @song.id).first
   if @vote
     @error = true
-    @songs = Song.all
+    @songs = Song.all.order(total_votes: :desc)
     erb :'songs/index'
   else
     Vote.create(user_id: current_user.id, song_id: @song.id, total_votes: params[:vote])
+    @song.update(total_votes: Vote.where(song_id: @song.id).sum(:total_votes))
+    @song.save
     redirect '/songs'
   end
 end
