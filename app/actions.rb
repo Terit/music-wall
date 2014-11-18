@@ -83,6 +83,7 @@ post '/songs/new' do
 end
 
 post '/songs' do
+  binding.pry
   @song = Song.find(params[:song_id].to_i)
   @vote = Vote.where(user_id: current_user.id, song_id: @song.id).first
   if @vote
@@ -90,7 +91,7 @@ post '/songs' do
     @songs = Song.all
     erb :'songs/index'
   else
-    Vote.create(user_id: current_user.id, song_id: @song.id, total_votes: 1)
+    Vote.create(user_id: current_user.id, song_id: @song.id, total_votes: params[:vote])
     redirect '/songs'
   end
 end
