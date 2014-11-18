@@ -24,13 +24,14 @@ post '/login' do
     session[:user_id] = @user.id
     redirect '/songs'
   else
-    redirect '/login'
+    @error = true
+    erb :login
   end
 end
 
 get '/logout' do
   session.clear
-  erb :'songs/index'
+  redirect '/songs'
 end
 
 get '/register' do
