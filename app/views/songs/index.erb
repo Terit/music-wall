@@ -5,6 +5,9 @@
   <% @songs.each do |song| %>
     <div class="song">
       <a href="songs/<%= song.id %>">
+
+      <h5>Votes: <%= Vote.where(song_id: song.id).sum(:total_votes) %></h5>
+
       <h4><%= song.author %> - <%= song.title %><small> Posted By: <%= song.user.first_name %> <%= song.user.last_name %></small></h4>
   </a>
     </div>
