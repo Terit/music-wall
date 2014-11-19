@@ -10,18 +10,17 @@
 <% if @songs %>
   <div class="container">
 
-  <% @songs.each do |song| %>
-  <div class="row">
-    <div class="col-md-10">
-      <a href="songs/<%= song.id %>">
-        <h4><%= song.author %> - <%= song.title %>
-        <small> Posted By: <%= song.user.first_name %> <%= song.user.last_name %></small>
-        </h4>
-      </a>
+    <% @songs.each do |song| %>
+    <div class="row">
+      <div class="col-md-10">
+        <a href="songs/<%= song.id %>">
+          <h4><%= song.author %> - <%= song.title %>
+          <small> Posted By: <%= song.user.first_name %> <%= song.user.last_name %></small>
+          </h4>
+        </a>
       </div>
 
       <div class="col-md-2 volume-controls">
-        <!-- <h5>Votes: <%= Vote.where(song_id: song.id).sum(:total_votes) %> </h5> -->
         <h5>Votes: <%= song.total_votes %> </h5>
         <form method="post">
             <% if session[:user_id] %>
@@ -34,12 +33,12 @@
             <% end %>
         </form>
       </div>
-      </div>
-  <% end %>
+    </div>
+    <% end %>
   </div>
 
 <% end %>
+</hr>
 
-<div>
-<a href="/songs/new"><h3>Post your own song</h3></a>
-</div>
+<a href="/songs/new">Post your own song</a>
+
