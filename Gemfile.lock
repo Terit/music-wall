@@ -21,7 +21,7 @@ GEM
       concurrent-ruby (~> 1.0)
     method_source (0.8.2)
     minitest (5.11.3)
-    multi_json (1.13.1)
+    multi_json (1.15.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
